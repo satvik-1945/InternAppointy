@@ -6,7 +6,7 @@ import(
 	"net/http"
 	"time"
 	// "reflect"
-	"io/ioutil"
+	"io"
 // entities
 )
 type Resource struct {
@@ -77,11 +77,13 @@ func StringToTime(timeStr string) (time.Time, error) {
 	return t, nil
 }
 
-func Body()
+// func Body()
 
 
-func main() {
-    url := "http://api.internship.appointy.com:8000/v1/availability?"
+//fetch the data from the api
+func helper1() {
+
+    url := "http://api.internship.appointy.com:8000/v1/durations?"
 
     // Create a Bearer string by appending string access token
     var bearer =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIyMDIzLTA4LTEwVDAwOjAwOjAwWiIsInVzZXJfaWQiOjE5fQ.b_yAlhv8FMhXexY_zXdth3OFlESUVnp505kOlVgFmRg"
@@ -98,11 +100,160 @@ func main() {
     if err != nil {
         log.Println("Error on response.\n[ERROR] -", err)
     }
-    defer resp.Body.Close()
+	defer resp.Body.Close()
 
-    body, err := ioutil.ReadAll(resp.Body)
+	if resp.StatusCode == http.StatusOK {
+		bodyBytes, err := io.ReadAll(resp.Body)
+		// if u want to read the body many time
+		// u need to restore 
+		// reader := io.NopCloser(bytes.NewReader(bodyBytes))
+		if err != nil {
+			log.Fatal(err)
+		}
+		ans := string(bodyBytes)
+		// log.Info(bodyString)
+		return ans
+
+	}
+}
+func helper2() {
+
+    url := "http://api.internship.appointy.com:8000/v1/resources?"
+
+    // Create a Bearer string by appending string access token
+    var bearer =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIyMDIzLTA4LTEwVDAwOjAwOjAwWiIsInVzZXJfaWQiOjE5fQ.b_yAlhv8FMhXexY_zXdth3OFlESUVnp505kOlVgFmRg"
+
+    // Create a new request using http
+    req, err := http.NewRequest("GET", url, nil)
+
+    // add authorization header to the req
+    req.Header.Add("Authorization", bearer)
+
+    // Send req using http Client
+    client := &http.Client{}
+    resp, err := client.Do(req)
     if err != nil {
-        log.Println("Error while reading the response bytes:", err)
+        log.Println("Error on response.\n[ERROR] -", err)
     }
-    log.Println(string([]byte(body)))
+	defer resp.Body.Close()
+
+	if resp.StatusCode == http.StatusOK {
+		bodyBytes, err := io.ReadAll(resp.Body)
+		// if u want to read the body many time
+		// u need to restore 
+		// reader := io.NopCloser(bytes.NewReader(bodyBytes))
+		if err != nil {
+			log.Fatal(err)
+		}
+		bodyString := string(bodyBytes)
+		// log.Info(bodyString)
+		println(bodyString)
+	}
+}
+func helper3() {
+
+    url := "http://api.internship.appointy.com:8000/v1/business-hours?"
+
+    // Create a Bearer string by appending string access token
+    var bearer =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIyMDIzLTA4LTEwVDAwOjAwOjAwWiIsInVzZXJfaWQiOjE5fQ.b_yAlhv8FMhXexY_zXdth3OFlESUVnp505kOlVgFmRg"
+
+    // Create a new request using http
+    req, err := http.NewRequest("GET", url, nil)
+
+    // add authorization header to the req
+    req.Header.Add("Authorization", bearer)
+
+    // Send req using http Client
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        log.Println("Error on response.\n[ERROR] -", err)
+    }
+	defer resp.Body.Close()
+
+	if resp.StatusCode == http.StatusOK {
+		bodyBytes, err := io.ReadAll(resp.Body)
+		// if u want to read the body many time
+		// u need to restore 
+		// reader := io.NopCloser(bytes.NewReader(bodyBytes))
+		if err != nil {
+			log.Fatal(err)
+		}
+		bodyString := string(bodyBytes)
+		// log.Info(bodyString)
+		println(bodyString)
+	}
+}
+func helper4() {
+
+    url := "http://api.internship.appointy.com:8000/v1/block-hours?"
+
+    // Create a Bearer string by appending string access token
+    var bearer =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIyMDIzLTA4LTEwVDAwOjAwOjAwWiIsInVzZXJfaWQiOjE5fQ.b_yAlhv8FMhXexY_zXdth3OFlESUVnp505kOlVgFmRg"
+
+    // Create a new request using http
+    req, err := http.NewRequest("GET", url, nil)
+
+    // add authorization header to the req
+    req.Header.Add("Authorization", bearer)
+
+    // Send req using http Client
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        log.Println("Error on response.\n[ERROR] -", err)
+    }
+	defer resp.Body.Close()
+
+	if resp.StatusCode == http.StatusOK {
+		bodyBytes, err := io.ReadAll(resp.Body)
+		// if u want to read the body many time
+		// u need to restore 
+		// reader := io.NopCloser(bytes.NewReader(bodyBytes))
+		if err != nil {
+			log.Fatal(err)
+		}
+		bodyString := string(bodyBytes)
+		// log.Info(bodyString)
+		println(bodyString)
+	}
+}
+func helper5() {
+
+    url := "http://api.internship.appointy.com:8000/v1/appointments?"
+
+    // Create a Bearer string by appending string access token
+    var bearer =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIyMDIzLTA4LTEwVDAwOjAwOjAwWiIsInVzZXJfaWQiOjE5fQ.b_yAlhv8FMhXexY_zXdth3OFlESUVnp505kOlVgFmRg"
+
+    // Create a new request using http
+    req, err := http.NewRequest("GET", url, nil)
+
+    // add authorization header to the req
+    req.Header.Add("Authorization", bearer)
+
+    // Send req using http Client
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        log.Println("Error on response.\n[ERROR] -", err)
+    }
+	defer resp.Body.Close()
+
+	if resp.StatusCode == http.StatusOK {
+		bodyBytes, err := io.ReadAll(resp.Body)
+		// if u want to read the body many time
+		// u need to restore 
+		// reader := io.NopCloser(bytes.NewReader(bodyBytes))
+		if err != nil {
+			log.Fatal(err)
+		}
+		bodyString := string(bodyBytes)
+		// log.Info(bodyString)
+		println(bodyString)
+	}
+}
+
+func main(){
+	
+
 }
